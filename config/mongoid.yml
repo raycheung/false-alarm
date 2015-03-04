@@ -1,0 +1,21 @@
+development:
+  sessions:
+    default:
+      database: false_alarm_dev
+      hosts:
+        - localhost:27017
+
+test:
+  sessions:
+    default:
+      database: false_alarm_test
+      hosts:
+        - localhost:27017
+
+production:
+  sessions:
+    default:
+      uri: <%= ENV['MONGOLAB_URI'] %> # we are using MongoLab
+      options:
+        timeout: 15
+        refresh_interval: 10
