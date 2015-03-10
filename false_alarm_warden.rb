@@ -14,7 +14,7 @@ set :run, false
 # NOTE: assuming we hitting Slack
 def call_webhook(message)
   payload = { username: 'false-alarm-bot', icon_emoji: ':false-alarm:', text: message }
-  payload.merge(channel: ENV['ALERT_CHANNEL']) if ENV['ALERT_CHANNEL']
+  payload.merge!(channel: ENV['ALERT_CHANNEL']) if ENV['ALERT_CHANNEL']
   body, code, content = Webhook.post(ENV['ALERT_WEBHOOK'], payload: payload.to_json)
   p "Webhook payload: #{payload}, response: #{[body, code, content]}"
 end
