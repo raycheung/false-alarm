@@ -10,6 +10,8 @@ gem 'puma'
 gem "mongoid", "~> 4.0.0"
 gem 'bson_ext'
 
+gem 'webhook'
+
 gem 'raygun4ruby'
 
 gem 'byebug', groups: [:development, :test]
