@@ -11,13 +11,19 @@ Mongoid.load!(File.expand_path(File.join(File.dirname(__FILE__), 'config', 'mong
 # not a server
 set :run, false
 
-Alarm.where(:created_at.lt => 15.minutes.ago, last_call: nil).each do |alarm|
-  # TODO: post to webhook
-  puts "Any setup error?"
+# NOTE: assuming we hitting Slack
+def call_webhook(message)
+  payload = { username: 'false-alarm-bot', icon_emoji: ':false-alarm:', text: message }
+  payload.merge(channel: ENV['ALERT_CHANNEL']) if ENV['ALERT_CHANNEL']
+  body, code, content = Webhook.post(ENV['ALERT_WEBHOOK'], payload: payload.to_json)
+  p "Webhook payload: #{payload}, response: #{[body, code, content]}"
 end
 
-# TODO: post to webhook
-alert = -> (alarm) { puts "Alert!" }
+Alarm.where(:created_at.lt => 15.minutes.ago, last_call: nil).each do |alarm|
+  call_webhook "Ouch! Any setup error for the alarm: #{alarm.key}?"
+end
+
+alert = -> (alarm) { call_webhook "Oops! Alarm: #{alarm.key} is not suppressed #{alarm.interval}." }
 
 puts "[#{ENV['RACK_ENV']}] There are: #{Alarm.count} alarms."
 puts "Checking hourly alarms..."

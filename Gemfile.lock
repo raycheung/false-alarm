@@ -83,6 +83,7 @@ GEM
     tilt (1.4.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    webhook (0.1.0)
 
 PLATFORMS
   ruby
@@ -99,3 +100,4 @@ DEPENDENCIES
   rspec (~> 3.2)
   sinatra
   sinatra-contrib
+  webhook
