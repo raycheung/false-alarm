@@ -10,6 +10,7 @@ class Alarm
 
   field :key, type: String
   field :interval, type: String
+  field :total, type: Integer
   field :last_call, type: DateTime
 
   validates :key, presence: true, uniqueness: true, format: { with: KEY_FORMAT }
@@ -43,6 +44,7 @@ class FalseAlarm < Sinatra::Base
     alarm = Alarm.where(key: key).first if key.match Alarm::KEY_FORMAT
     return status 404 unless alarm
     alarm.last_call = Time.current
+    alarm.inc(total: 1)
     raise "failed to persist" unless alarm.save
     "OK"
   end
