@@ -10,7 +10,7 @@ gem 'puma'
 gem "mongoid", "~> 4.0.0"
 gem 'bson_ext'
 
-gem 'webhook'
+gem 'slack-notifier'
 
 gem 'raygun4ruby'
 
