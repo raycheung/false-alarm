@@ -78,6 +78,7 @@ GEM
       rack-test
       sinatra (~> 1.4.0)
       tilt (~> 1.3)
+    slack-notifier (1.1.0)
     slop (3.6.0)
     thread_safe (0.3.4)
     tilt (1.4.1)
@@ -100,4 +101,4 @@ DEPENDENCIES
   rspec (~> 3.2)
   sinatra
   sinatra-contrib
-  webhook
+  slack-notifier
