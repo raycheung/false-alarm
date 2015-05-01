@@ -15,10 +15,10 @@ notifier_payload = { username: 'false-alarm-bot', icon_emoji: ':false-alarm:', c
 notifier = Slack::Notifier.new ENV['ALERT_WEBHOOK'], notifier_payload
 
 Alarm.where(:created_at.lt => 15.minutes.ago, last_call: nil).each do |alarm|
-  notifier.ping "Ouch! Any setup error for the alarm: #{alarm.key}?"
+  notifier.ping "Ouch! Any setup error for the alarm: '#{alarm.name}'?"
 end
 
-alert = -> (alarm) { notifier.ping "Oops! Alarm: #{alarm.key} is not snoozed #{alarm.interval}." }
+alert = -> (alarm) { notifier.ping "Oops! Alarm: '#{alarm.name}' is not snoozed #{alarm.interval}." }
 
 puts "[#{ENV['RACK_ENV']}] There are: #{Alarm.count} alarms."
 puts "Checking hourly alarms..."

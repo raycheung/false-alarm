@@ -14,6 +14,15 @@ describe FalseAlarm do
           expect(last_one.interval).to eq interval
         end
       end
+
+      context "when tagged with a `tag`" do
+        it "tags the new alarm with that `tag`" do
+          get "/new/daily?tag=daily_report"
+          expect(last_response).to be_ok
+          last_one = Alarm.last
+          expect(last_one.tag).to eq 'daily_report'
+        end
+      end
     end
 
     context "for an invalid interval" do

@@ -11,9 +11,14 @@ class Alarm
   field :key, type: String
   field :interval, type: String
   field :last_call, type: DateTime
+  field :tag, type: String
 
   validates :key, presence: true, uniqueness: true, format: { with: KEY_FORMAT }
   validates :interval, presence: true, inclusion: { in: INTERVALS }
+
+  def name
+    tag.present? ? tag : key
+  end
 
   def self.new_key
     begin
@@ -34,7 +39,7 @@ class FalseAlarm < Sinatra::Base
   end
 
   get '/new/:interval' do |interval|
-    alarm = Alarm.create(key: Alarm.new_key, interval: interval)
+    alarm = Alarm.create(key: Alarm.new_key, interval: interval, tag: params[:tag])
     status 404 and return alarm.errors.messages.to_json unless alarm.persisted?
     alarm.key
   end
