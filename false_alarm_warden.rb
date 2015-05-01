@@ -18,7 +18,7 @@ Alarm.where(:created_at.lt => 15.minutes.ago, last_call: nil).each do |alarm|
   notifier.ping "Ouch! Any setup error for the alarm: #{alarm.key}?"
 end
 
-alert = -> (alarm) { notifier.ping "Oops! Alarm: #{alarm.key} is not suppressed #{alarm.interval}." }
+alert = -> (alarm) { notifier.ping "Oops! Alarm: #{alarm.key} is not snoozed #{alarm.interval}." }
 
 puts "[#{ENV['RACK_ENV']}] There are: #{Alarm.count} alarms."
 puts "Checking hourly alarms..."
