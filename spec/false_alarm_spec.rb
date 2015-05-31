@@ -37,7 +37,7 @@ describe FalseAlarm do
 
   describe "/:key" do
     let(:key) { "12345ab" }
-    before { Alarm.create!(key: key, interval: "daily", last_call: nil) }
+    before { Alarm.create!(key: key, interval: "daily", last_call: nil, total: 0) }
 
     it "updates the :last_call field" do
       get "/#{key}"
@@ -46,6 +46,13 @@ describe FalseAlarm do
       last_one = Alarm.last
       expect(last_one.last_call).to be_present
       expect(last_one.last_call).to be_a DateTime
+    end
+
+    it "increase total by 1" do
+      get "/#{key}"
+      expect(last_response).to be_ok
+      last_one = Alarm.last
+      expect(last_one.total).to eq 1
     end
 
     context "if :key is not in valid format" do
