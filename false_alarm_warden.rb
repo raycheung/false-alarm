@@ -22,9 +22,9 @@ alert = -> (alarm) { notifier.ping "Oops! Alarm: '#{alarm.name}' is not snoozed 
 
 puts "[#{ENV['RACK_ENV']}] There are: #{Alarm.count} alarms."
 puts "Checking hourly alarms..."
-Alarm.where(interval: 'hourly', :last_call.lt => 1.hour.ago).each &alert
+Alarm.where(interval: 'hourly', :last_call.lt => 1.hour.ago).each(&alert)
 puts "Checking daily alarms..."
-Alarm.where(interval: 'daily', :last_call.lt => 1.day.ago).each &alert
+Alarm.where(interval: 'daily', :last_call.lt => 1.day.ago).each(&alert)
 puts "Checking monthly alarms..."
-Alarm.where(interval: 'monthly', :last_call.lt => 1.month.ago).each &alert
+Alarm.where(interval: 'monthly', :last_call.lt => 1.month.ago).each(&alert)
 puts "Job done, bye bye."
