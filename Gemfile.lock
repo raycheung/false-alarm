@@ -1,3 +1,15 @@
+GIT
+  remote: git://github.com/sinatra/sinatra-contrib.git
+  revision: d856355561dd5b1e1e80f493d6df6806afac1b63
+  specs:
+    sinatra-contrib (1.4.4)
+      backports (>= 2.0)
+      multi_json
+      rack-protection
+      rack-test
+      sinatra (~> 1.4.0)
+      tilt (>= 1.3, < 3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -68,13 +80,6 @@ GEM
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
-    sinatra-contrib (1.4.4)
-      backports (>= 2.0)
-      multi_json
-      rack-protection
-      rack-test
-      sinatra (~> 1.4.0)
-      tilt (>= 1.3, < 3)
     slack-notifier (1.2.1)
     thread_safe (0.3.5)
     tilt (2.0.1)
@@ -95,7 +100,7 @@ DEPENDENCIES
   raygun4ruby
   rspec (>= 3.2)
   sinatra
-  sinatra-contrib
+  sinatra-contrib!
   slack-notifier
 
 BUNDLED WITH

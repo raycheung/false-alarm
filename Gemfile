@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 
 gem 'sinatra'
-gem 'sinatra-contrib'
+gem 'sinatra-contrib', github: 'sinatra/sinatra-contrib'
 
 gem 'puma'
 
