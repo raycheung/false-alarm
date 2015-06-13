@@ -12,6 +12,8 @@ describe FalseAlarm do
           last_one = Alarm.last
           expect(last_one.key).to match Alarm::KEY_FORMAT
           expect(last_one.interval).to eq interval
+          expect(last_one.tag).to be_nil
+          expect(last_one.threshold).to eq 1
         end
       end
 
@@ -23,6 +25,15 @@ describe FalseAlarm do
           expect(last_one.tag).to eq 'daily_report'
         end
       end
+
+      context "when set with a `threshold`" do
+        it "sets the new alarm with that `threshold`" do
+          get "/new/daily?threshold=50"
+          expect(last_response).to be_ok
+          last_one = Alarm.last
+          expect(last_one.threshold).to eq 50
+        end
+      end
     end
 
     context "for an invalid interval" do
@@ -30,7 +41,7 @@ describe FalseAlarm do
         get "/new/secondly"
         expect(last_response).not_to be_ok
         expect(last_response.status).to eq 404
-        expect(last_response.body).to match /interval/
+        expect(last_response.body).to match(/interval/)
       end
     end
   end
@@ -42,10 +53,23 @@ describe FalseAlarm do
     it "updates the :last_call field" do
       get "/#{key}"
       expect(last_response).to be_ok
-      expect(last_response.body).to match /OK/
+      expect(last_response.body).to match(/OK/)
       last_one = Alarm.last
       expect(last_one.last_call).to be_present
       expect(last_one.last_call).to be_a DateTime
+    end
+
+    context "if it has a :threshold" do
+      before { Alarm.last.update(threshold: 10, count: 4) }
+
+      it "increments the :count field" do
+        get "/#{key}"
+        expect(last_response).to be_ok
+        expect(last_response.body).to match(/OK/)
+        last_one = Alarm.last
+        expect(last_one.threshold).to be_present
+        expect(last_one.count).to eq(5)
+      end
     end
 
     context "if :key is not in valid format" do

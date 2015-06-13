@@ -21,10 +21,12 @@ end
 alert = -> (alarm) { notifier.ping "Oops! Alarm: '#{alarm.name}' is not snoozed #{alarm.interval}." }
 
 puts "[#{ENV['RACK_ENV']}] There are: #{Alarm.count} alarms."
+# TODO: check for alarms with :count < :threshold
 puts "Checking hourly alarms..."
 Alarm.where(interval: 'hourly', :last_call.lt => 1.hour.ago).each(&alert)
 puts "Checking daily alarms..."
 Alarm.where(interval: 'daily', :last_call.lt => 1.day.ago).each(&alert)
 puts "Checking monthly alarms..."
 Alarm.where(interval: 'monthly', :last_call.lt => 1.month.ago).each(&alert)
+# TODO: expire :count of alarams
 puts "Job done, bye bye."
