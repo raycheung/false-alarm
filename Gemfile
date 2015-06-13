@@ -10,17 +10,16 @@ gem 'puma'
 gem "mongoid", "~> 4.0.0"
 gem 'bson_ext'
 
-gem 'slack-notifier'
+gem 'activesupport'
 
 gem 'raygun4ruby'
+gem 'slack-notifier'
 
 gem 'byebug', groups: [:development, :test]
 
-gem 'activesupport'
-
 group :test do
   gem 'database_cleaner'
-  gem 'rspec', '~> 3.2'
+  gem 'rspec', '>= 3.2'
 end
 
 group :production do
