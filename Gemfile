@@ -15,7 +15,10 @@ gem 'activesupport'
 gem 'raygun4ruby'
 gem 'slack-notifier'
 
-gem 'byebug', groups: [:development, :test]
+group :development, :test do
+  gem 'pry'
+  gem 'byebug'
+end
 
 group :test do
   gem 'database_cleaner'

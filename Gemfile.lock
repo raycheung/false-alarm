@@ -28,6 +28,7 @@ GEM
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
+    coderay (1.1.0)
     columnize (0.9.0)
     connection_pool (2.2.0)
     database_cleaner (1.4.1)
@@ -37,6 +38,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
     json (1.8.3)
+    method_source (0.8.2)
     minitest (5.7.0)
     mongoid (4.0.2)
       activemodel (~> 4.0)
@@ -52,6 +54,10 @@ GEM
     newrelic_rpm (3.12.0.288)
     optionable (0.2.0)
     origin (2.1.1)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     puma (2.11.3)
       rack (>= 1.1, < 2.0)
     rack (1.6.1)
@@ -81,6 +87,7 @@ GEM
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
     slack-notifier (1.2.1)
+    slop (3.6.0)
     thread_safe (0.3.5)
     tilt (2.0.1)
     tzinfo (1.2.2)
@@ -96,6 +103,7 @@ DEPENDENCIES
   database_cleaner
   mongoid (~> 4.0.0)
   newrelic_rpm
+  pry
   puma
   raygun4ruby
   rspec (>= 3.2)
