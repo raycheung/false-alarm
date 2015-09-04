@@ -50,8 +50,8 @@ class FalseAlarm < Sinatra::Base
 
   get '/:key' do |key|
     alarm = Alarm.where(key: key).first if key.match Alarm::KEY_FORMAT
-    alarm.inc(count: 1) if alarm.threshold
     return status 404 unless alarm
+    alarm.inc(count: 1) if alarm.threshold
     alarm.last_call = Time.current
     raise "failed to persist" unless alarm.save
     "OK"
