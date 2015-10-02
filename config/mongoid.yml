@@ -1,19 +1,19 @@
 development:
-  sessions:
+  clients:
     default:
       database: false_alarm_dev
       hosts:
         - localhost:27017
 
 test:
-  sessions:
+  clients:
     default:
       database: false_alarm_test
       hosts:
         - localhost:27017
 
 production:
-  sessions:
+  clients:
     default:
       uri: <%= ENV['MONGOLAB_URI'] %> # we are using MongoLab
       options:

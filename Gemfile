@@ -7,7 +7,7 @@ gem 'sinatra-contrib', github: 'sinatra/sinatra-contrib'
 
 gem 'puma'
 
-gem "mongoid", "~> 4.0.0"
+gem "mongoid", "~> 5.0.0"
 gem 'bson_ext'
 
 gem 'activesupport'
@@ -21,7 +21,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'database_cleaner'
+  gem 'database_cleaner', git: 'https://github.com/DatabaseCleaner/database_cleaner.git'
   gem 'rspec', '>= 3.2'
 end
 
